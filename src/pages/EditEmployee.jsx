@@ -5,6 +5,19 @@ import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-reac
 function EditEmployee() {
   const { employeeList } = useContext(EmployeeContext);
 
+  const getEmploymentColor = (employment) => {
+    switch (employment) {
+          case 'full-time':
+            return 'success';
+          case 'part-time':
+            return 'warning';
+          case 'temporary':
+            return 'danger';
+          default:
+            return 'primary';
+    }
+  };
+
   return (
     <MDBTable align='middle'>
       <MDBTableHead>
@@ -37,7 +50,7 @@ function EditEmployee() {
               <p className='text-muted mb-0'>{employee.email}</p>
             </td>
             <td>
-              <MDBBadge color='success' pill>
+              <MDBBadge color={getEmploymentColor(employee.employment)} pill>
                 {employee.employment}
               </MDBBadge>
             </td>
