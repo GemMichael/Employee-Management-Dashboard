@@ -112,7 +112,7 @@ const handleAddEmployee = () => {
                                 className="form-select" 
                                 aria-label="Employment Type"
                                 required>
-                                    <option value="" disabled selected>Select employment type</option>
+                                    <option value="" disabled>Select employment type</option>
                                     <option value="full-time">Full-time</option>
                                     <option value="part-time">Part-time</option>
                                     <option value="temporary">Temporary</option>

@@ -56,10 +56,6 @@ function EmployeeCard() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <hr />
-                                        <MDBBtn color="success" rounded block size="lg">
-                                            <MDBIcon far icon="clock me-2" /> Book now
-                                        </MDBBtn>
                                     </MDBCardBody>
                                 </MDBCard>
                             </MDBCol>
