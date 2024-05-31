@@ -4,7 +4,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody, MDBInput } from 'mdb-react-ui-kit';
 
 function EditEmployee() {
-  const { employeeList, updateEmployee } = useContext(EmployeeContext);
+  const { employeeList, updateEmployee, deleteEmployee } = useContext(EmployeeContext);
   const [editingEmployeeId, setEditingEmployeeId] = useState(null);
   const [editedFirstname, setEditedFirstname] = useState("");
   const [editedEmail, setEditedEmail] = useState("");
@@ -47,6 +47,10 @@ function EditEmployee() {
     setEditingEmployeeId(null);
   };
 
+  const handleDelete = (employeeId) => {
+    deleteEmployee(employeeId);
+  };
+
   return (
     <div className="overflow-y-auto" style={{ maxHeight: 'calc(100vh - 100px)' }}>
       <MDBTable align='middle'>
@@ -67,7 +71,7 @@ function EditEmployee() {
                   <MDBInput type='text' value={editedFirstname} onChange={(e) => setEditedFirstname(e.target.value)} />
                 ) : (
                   <div className='d-flex align-items-center'>
-                    <i className="bi bi-person" style={{ fontSize: '1.5rem', marginRight: '10px' }}></i> 
+                    <i className="bi bi-person" style={{ fontSize: '1.5rem', marginRight: '10px' }}></i>
                     <div className='ms-3'>
                       <p className='fw-bold mb-1'>{employee.firstname}</p>
                       <p className='text-muted mb-0'>{employee.lastname}</p>
@@ -104,13 +108,23 @@ function EditEmployee() {
               </td>
               <td>
                 {editingEmployeeId === employee.id ? (
-                  <MDBBtn color='success' size='sm' onClick={handleSave}>
-                    Save
-                  </MDBBtn>
+                  <>
+                    <MDBBtn color='success' size='sm' onClick={handleSave}>
+                      Save
+                    </MDBBtn>
+                    <MDBBtn color='danger' size='sm' onClick={() => setEditingEmployeeId(null)}>
+                      Cancel
+                    </MDBBtn>
+                  </>
                 ) : (
-                  <MDBBtn color='link' rounded size='sm' onClick={() => handleEdit(employee.id, employee.firstname, employee.email, employee.employment, employee.department)}>
-                    Edit
-                  </MDBBtn>
+                  <>
+                    <MDBBtn color='success' className="m-1"  rounded size='sm' onClick={() => handleEdit(employee.id, employee.firstname, employee.email, employee.employment, employee.department)}>
+                      Edit
+                    </MDBBtn>
+                    <MDBBtn color='danger' className="m-1" size='sm' onClick={() => handleDelete(employee.id)}>
+                      Delete
+                    </MDBBtn>
+                  </>
                 )}
               </td>
             </tr>

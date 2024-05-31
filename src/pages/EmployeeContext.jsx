@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, onSnapshot, addDoc, doc, updateDoc } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: "AIzaSyA6umq2m6N-h8COcX7BepErMZNDn0rZKg0",
@@ -50,8 +50,17 @@ export const EmployeeProvider = ({ children }) => {
         }
     };
 
+    const deleteEmployee = async (employeeId) => {
+        try {
+            const employeeRef = doc(firestore, 'employee', employeeId);
+            await deleteDoc(employeeRef);
+        } catch (e) {
+            console.error("Error deleting document: ", e.message);
+        }
+    };
+
     return (
-        <EmployeeContext.Provider value={{ employeeList, addEmployee, updateEmployee }}>
+        <EmployeeContext.Provider value={{ employeeList, addEmployee, updateEmployee, deleteEmployee }}>
             {children}
         </EmployeeContext.Provider>
     );
