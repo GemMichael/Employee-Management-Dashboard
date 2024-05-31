@@ -38,14 +38,7 @@ const handleAddEmployee = () => {
                     <MDBTypography tag='h6'>Add Employee</MDBTypography>
                   </div>
                   <div className="d-flex align-items-center mb-4">
-                    <div className="flex-shrink-0">
-                      <MDBCardImage
-                        style={{ width: '70px' }}
-                        className="img-fluid rounded-circle border border-dark border-3"
-                        src='https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp'
-                        alt='Generic placeholder image'
-                        fluid />
-                    </div>
+
                     <div className="flex-grow-1 ms-3">
                       <div className="d-flex flex-row align-items-center mb-2">
                         <ul className="mb-0 list-unstyled d-flex flex-row" style={{ color: '#1B7B2C' }}>

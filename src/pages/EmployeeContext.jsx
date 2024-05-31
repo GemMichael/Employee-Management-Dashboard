@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, onSnapshot, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot, addDoc, doc, updateDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
     apiKey: "AIzaSyA6umq2m6N-h8COcX7BepErMZNDn0rZKg0",
@@ -10,7 +10,8 @@ const firebaseConfig = {
     messagingSenderId: "21127655812",
     appId: "1:21127655812:web:7eca591bf3217603666dd1",
     measurementId: "G-FLCH03KWRM"
-};
+  };
+
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -22,14 +23,11 @@ export const EmployeeProvider = ({ children }) => {
     const [employeeList, setEmployeeList] = useState([]);
 
     useEffect(() => {
-        const db = getFirestore(app);
-        const unsubscribe = onSnapshot(collection(db, 'employee'), snapshot => {
-            const newEmployeeList = [];
-            snapshot.forEach(employee => {
-                const tempEmployee = employee.data();
-                tempEmployee["id"] = employee.id;
-                newEmployeeList.push(tempEmployee);
-            });
+        const unsubscribe = onSnapshot(collection(firestore, 'employee'), snapshot => {
+            const newEmployeeList = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
             setEmployeeList(newEmployeeList);
         });
         return () => unsubscribe();
@@ -37,23 +35,23 @@ export const EmployeeProvider = ({ children }) => {
 
     const addEmployee = async (employee) => {
         try {
-            const db = getFirestore(app);
-            const docRef = await addDoc(collection(db, 'employee'), employee);
-    
-            // Check if the employee is already in the list
-            const isDuplicate = employeeList.some(emp => emp.id === docRef.id);
-    
-            if (!isDuplicate) {
-                // Only add the employee if it's not a duplicate
-                setEmployeeList(prevList => [...prevList, { ...employee, id: docRef.id }]);
-            }
+            await addDoc(collection(firestore, 'employee'), employee);
         } catch (e) {
-            console.error("Error adding document: ", e);
+            console.error("Error adding document: ", e.message);
+        }
+    };
+
+    const updateEmployee = async (employeeId, updatedEmployeeData) => {
+        try {
+            const employeeRef = doc(firestore, 'employee', employeeId);
+            await updateDoc(employeeRef, updatedEmployeeData);
+        } catch (e) {
+            console.error("Error updating document: ", e.message);
         }
     };
 
     return (
-        <EmployeeContext.Provider value={{ employeeList, addEmployee }}>
+        <EmployeeContext.Provider value={{ employeeList, addEmployee, updateEmployee }}>
             {children}
         </EmployeeContext.Provider>
     );

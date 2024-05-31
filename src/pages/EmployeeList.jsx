@@ -1,49 +1,62 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
+import { EmployeeContext } from './EmployeeContext';
 import { BarChart } from '@mui/x-charts/BarChart';
-import { LineChart } from '@mui/x-charts/LineChart';
+import EditEmployee from './EditEmployee';
 
+function EmployeeChart() {
+  const { employeeList } = useContext(EmployeeContext);
 
-function EmployeeList(){
-    return(
+  // Function to calculate employee counts by employment type
+  const getEmployeeCountsByType = () => {
+    const counts = {
+      fullTime: 0,
+      partTime: 0,
+      temporary: 0
+    };
 
-        <>
-        <section>
-          <h1 className='fw-bold'>Employee List</h1>
-          <hr />
-          <div className='mb-5 p-5'>
-            <div className='row'>
-              <div className="col-md-5">
-                
-              </div>
-            </div>
-          </div>
-        </section>
+    // Iterate through employeeList and count employees by employment type
+    employeeList.forEach(employee => {
+      switch (employee.employment) {
+        case 'full-time':
+          counts.fullTime++;
+          break;
+        case 'part-time':
+          counts.partTime++;
+          break;
+        case 'temporary':
+          counts.temporary++;
+          break;
+        default:
+          break;
+      }
+    });
 
-         <BarChart
-        xAxis={[{ scaleType: 'band', data: ['group A', 'group B', 'group C'] }]}
-        series={[{ data: [4, 3, 5] }, { data: [1, 6, 3] }, { data: [2, 5, 6] }]}
-        width={500}
-         height={300}
+    return counts;
+  };
+
+  // Get employee counts by type
+  const employeeCounts = getEmployeeCountsByType();
+
+  // Define xAxis labels and series data for the BarChart
+  const xAxis = [{ scaleType: 'band', data: ['Full-time', 'Part-time', 'Temporary'] }];
+  const series = [{ data: [employeeCounts.fullTime, employeeCounts.partTime, employeeCounts.temporary] }];
+
+  return (
+    <div style={{ display: 'flex' }}>
+      <div style={{ flex: '1', overflowY: 'auto' }}>
+        <EditEmployee />
+      </div>
+
+      <div style={{ width: '500px', height: '300px' }}>
+        <BarChart
+          xAxis={xAxis}
+          series={series}
+          width={500}
+          height={300}
         />
-
-        <LineChart
-        xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
-        series={[
-        {
-          data: [2, 5.5, 2, 8.5, 1.5, 5],
-          area: true,
-        },
-      ]}
-      width={500}
-      height={300}
-    />
-
-
-        </>
-        
-
-    );
+      </div>
+    </div>
+  );
 }
 
-export default EmployeeList;
-
+export default EmployeeChart;
