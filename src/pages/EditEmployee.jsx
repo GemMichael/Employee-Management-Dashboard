@@ -154,19 +154,19 @@ function EditEmployee() {
                 <td>
                   {editingEmployeeId === employee.id ? (
                     <>
-                      <MDBBtn color='success' size='sm' onClick={handleSave}>
+                      <MDBBtn color='success'  size='sm' onClick={handleSave}>
                         Save
                       </MDBBtn>
-                      <MDBBtn color='danger' size='sm' onClick={() => setEditingEmployeeId(null)}>
+                      <MDBBtn color='danger'  size='sm' onClick={() => setEditingEmployeeId(null)}>
                         Cancel
                       </MDBBtn>
                     </>
                   ) : (
                     <>
-                      <MDBBtn color='success' className="m-1" rounded size='sm' onClick={() => handleEdit(employee.id, employee.firstname, employee.email, employee.employment, employee.department)}>
+                      <MDBBtn color='success' className="me-5" rounded size='sm' onClick={() => handleEdit(employee.id, employee.firstname, employee.email, employee.employment, employee.department)}>
                         Edit
                       </MDBBtn>
-                      <MDBBtn color='danger' className="m-1" size='sm' onClick={() => handleDelete(employee.id)}>
+                      <MDBBtn color='danger' className="me-5" size='sm' onClick={() => handleDelete(employee.id)}>
                         Delete
                       </MDBBtn>
                     </>

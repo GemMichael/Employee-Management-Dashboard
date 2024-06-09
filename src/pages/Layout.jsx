@@ -55,12 +55,8 @@ function Layout(){
                         aria-haspopup="true"
                         aria-expanded="false"
                     >
-                        <i className="bi bi-person f5-4"></i><span className="fs-5 ms-3 d-none d-sm-inline">Gem</span>
+                        <i className="bi bi-person f5-4"></i><span className="fs-5 ms-3 d-none d-sm-inline">Admin</span>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="triggerId">
-                        <a class="dropdown-item" href="#">Profile</a>
-                        <a class="dropdown-item" href="#">Settings</a>
-                    </div>
                 </div>
                 
             </div>

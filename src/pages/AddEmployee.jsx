@@ -17,14 +17,21 @@ function AddEmployee(){
 });
 
 const handleAddEmployee = () => {
+  if( employee.firstname === '' || employee.lastname === '' || employee.email === '' || employee.employment === '' || employee.department ===''){
+    alert("Missing fields!");
+  }else{
+
+  
   addEmployee(employee);
   setEmployee({
       firstname: '',
-      lastname: '',
+      lastname: '', 
       email: '',
       employment: '',
       department: '',
+  
   });
+}
 };
     return(
       <section>
@@ -70,7 +77,9 @@ const handleAddEmployee = () => {
                             })} 
                             value={employee.firstname}
                             className='form-control' 
-                            type='text' />
+                            type='text' 
+                            
+                            />
                         </div>
                         <div>
                             <label htmlFor="lastname">Last name:</label>
@@ -81,7 +90,9 @@ const handleAddEmployee = () => {
                         })} 
                         value={employee.lastname}
                             className='form-control' 
-                            type='text' />
+                            type='text' 
+                            
+                            />
                         </div>
                         <div>
                             <label htmlFor="email">Email:</label>
@@ -92,7 +103,9 @@ const handleAddEmployee = () => {
                             })} 
                             value={employee.email}
                             className='form-control' 
-                            type='email' />
+                            type='email' 
+                            
+                            />
                         </div>
                         <div>
                             <label htmlFor="employment">Employment Type:</label>
@@ -120,7 +133,9 @@ const handleAddEmployee = () => {
                         })} 
                         value={employee.department}
                         className='form-control' 
-                        type='text' />
+                        type='text' 
+                        
+                        />
                         </div>
                       </div>
                     </div>
