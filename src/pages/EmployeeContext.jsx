@@ -1,7 +1,9 @@
+// Import necessary modules and components from React, Firebase, and Firestore
 import React, { createContext, useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, onSnapshot, addDoc, doc, updateDoc, deleteDoc } from 'firebase/firestore';
 
+//Firebase configuration object containing API keys and project information
 const firebaseConfig = {
     apiKey: "AIzaSyA6umq2m6N-h8COcX7BepErMZNDn0rZKg0",
     authDomain: "employeemanagement-e5114.firebaseapp.com",
@@ -16,8 +18,10 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const firestore = getFirestore(app);
-
+//Create context for employee data
 export const EmployeeContext = createContext();
+//Export Firebase app and Firestore instance
+export { app, firestore };
 
 export const EmployeeProvider = ({ children }) => {
     const [employeeList, setEmployeeList] = useState([]);

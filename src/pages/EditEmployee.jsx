@@ -1,10 +1,13 @@
+// Import necessary modules and components from React, EmployeeContext, bootstrap-icons, and mdb-react-ui-kit
 import React, { useContext, useState } from "react";
 import { EmployeeContext } from "./EmployeeContext";
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody, MDBInput } from 'mdb-react-ui-kit';
 
 function EditEmployee() {
+  //Access employeeList, updateEmployee, add deleteEmployee from EmployeeContext
   const { employeeList, updateEmployee, deleteEmployee } = useContext(EmployeeContext);
+  //Local state for managing the editing employee, edited values, seacrh query, and filters
   const [editingEmployeeId, setEditingEmployeeId] = useState(null);
   const [editedFirstname, setEditedFirstname] = useState("");
   const [editedEmail, setEditedEmail] = useState("");
@@ -14,6 +17,7 @@ function EditEmployee() {
   const [employmentFilter, setEmploymentFilter] = useState("all");
   const [departmentFilter, setDepartmentFilter] = useState("all");
 
+  //Function to get color based on employment type
   const getEmploymentColor = (employment) => {
     switch (employment) {
       case 'full-time':
@@ -26,7 +30,7 @@ function EditEmployee() {
         return 'primary';
     }
   };
-
+  //Function to handle editing an employee
   const handleEdit = (employeeId, firstname, email, employment, department) => {
     setEditingEmployeeId(employeeId);
     setEditedFirstname(firstname);
@@ -34,7 +38,7 @@ function EditEmployee() {
     setEditedEmployment(employment);
     setEditedDepartment(department);
   };
-
+  //Function to save the edited employee data
   const handleSave = () => {
     const index = employeeList.findIndex(employee => employee.id === editingEmployeeId);
     if (index !== -1) {
@@ -49,16 +53,16 @@ function EditEmployee() {
     }
     setEditingEmployeeId(null);
   };
-
+  //Function to delete an employee
   const handleDelete = (employeeId) => {
     deleteEmployee(employeeId);
   };
-
+  //Filter the employee list based on search query and selected filters
   const filteredEmployees = employeeList.filter(employee =>
     (employee.firstname.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    employee.lastname.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    employee.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    employee.department.toLowerCase().includes(searchQuery.toLowerCase())) &&
+      employee.lastname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      employee.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      employee.department.toLowerCase().includes(searchQuery.toLowerCase())) &&
     (employmentFilter === "all" || employee.employment === employmentFilter) &&
     (departmentFilter === "all" || employee.department === departmentFilter)
   );
@@ -154,10 +158,10 @@ function EditEmployee() {
                 <td>
                   {editingEmployeeId === employee.id ? (
                     <>
-                      <MDBBtn color='success'  size='sm' onClick={handleSave}>
+                      <MDBBtn color='success' size='sm' onClick={handleSave}>
                         Save
                       </MDBBtn>
-                      <MDBBtn color='danger'  size='sm' onClick={() => setEditingEmployeeId(null)}>
+                      <MDBBtn color='danger' size='sm' onClick={() => setEditingEmployeeId(null)}>
                         Cancel
                       </MDBBtn>
                     </>

@@ -1,9 +1,11 @@
+// Import necessary modules and components from React, EmployeeContext, bootstrap-icons, and mdb-react-ui-kit
 import React, { useContext } from 'react';
 import { EmployeeContext } from './EmployeeContext';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 
 function EmployeeCard() {
+    //Access employeeList from EmployeeContext
     const { employeeList } = useContext(EmployeeContext);
 
     return (
@@ -19,7 +21,7 @@ function EmployeeCard() {
                                             <MDBTypography tag='h6'>Employee Card</MDBTypography>
                                         </div>
                                         <div className="d-flex align-items-center mb-4">
-                                        <div className="flex-shrink-0">
+                                            <div className="flex-shrink-0">
                                                 <i className="bi bi-person" style={{ fontSize: '70px', color: '#000', borderRadius: '50%', border: '3px solid #000', padding: '10px' }}></i>
                                             </div>
                                             <div className="flex-grow-1 ms-3">

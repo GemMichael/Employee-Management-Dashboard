@@ -1,41 +1,44 @@
+// Import necessary modules and components from React, EmployeeContext, and mdb-react-ui-kit
 import { useState } from 'react';
-import React, { useContext } from 'react'; 
+import React, { useContext } from 'react';
 import { EmployeeContext } from './EmployeeContext';
-import { Link } from 'react-router-dom';
-import EditEmployee from './EditEmployee';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 
-function AddEmployee(){
+function AddEmployee() {
+
+  //Access the addEmployee function from EmployeeContext
   const { addEmployee } = useContext(EmployeeContext);
 
+  //State variables for employee details
   const [employee, setEmployee] = useState({
     firstname: '',
     lastname: '',
     email: '',
     employment: '',
     department: '',
-});
-
-const handleAddEmployee = () => {
-  if( employee.firstname === '' || employee.lastname === '' || employee.email === '' || employee.employment === '' || employee.department ===''){
-    alert("Missing fields!");
-  }else{
-
-  
-  addEmployee(employee);
-  setEmployee({
-      firstname: '',
-      lastname: '', 
-      email: '',
-      employment: '',
-      department: '',
-  
   });
-}
-};
-    return(
-      <section>
-          <div className="vh-100" style={{ backgroundColor: '#eee' }}>
+
+  //Function to handle adding an employee
+  const handleAddEmployee = () => {
+    if (employee.firstname === '' || employee.lastname === '' || employee.email === '' || employee.employment === '' || employee.department === '') {
+      alert("Missing fields!");
+    } else {
+
+
+      addEmployee(employee);
+      setEmployee({
+        firstname: '',
+        lastname: '',
+        email: '',
+        employment: '',
+        department: '',
+
+      });
+    }
+  };
+  return (
+    <section>
+      <div className="vh-100" style={{ backgroundColor: '#eee' }}>
         <MDBContainer>
           <MDBRow className="justify-content-center">
             <MDBCol md="9" lg="7" xl="5" className="mt-5">
@@ -65,77 +68,77 @@ const handleAddEmployee = () => {
                             <MDBIcon fas icon="star fa-xs" />
                           </li>
                         </ul>
-  
+
                       </div>
                       <div>
                         <div>
-                            <label htmlFor="firstname">First name:</label>
-                            <input id="firstname" 
-                                onChange={(e)=>setEmployee({
-                                    ...employee,
-                                    firstname: e.target.value
-                            })} 
+                          <label htmlFor="firstname">First name:</label>
+                          <input id="firstname"
+                            onChange={(e) => setEmployee({
+                              ...employee,
+                              firstname: e.target.value
+                            })}
                             value={employee.firstname}
-                            className='form-control' 
-                            type='text' 
-                            
-                            />
+                            className='form-control'
+                            type='text'
+
+                          />
                         </div>
                         <div>
-                            <label htmlFor="lastname">Last name:</label>
-                            <input id="lastname" 
-                            onChange={(e)=>setEmployee({
-                                ...employee,
-                                lastname: e.target.value
-                        })} 
-                        value={employee.lastname}
-                            className='form-control' 
-                            type='text' 
-                            
-                            />
+                          <label htmlFor="lastname">Last name:</label>
+                          <input id="lastname"
+                            onChange={(e) => setEmployee({
+                              ...employee,
+                              lastname: e.target.value
+                            })}
+                            value={employee.lastname}
+                            className='form-control'
+                            type='text'
+
+                          />
                         </div>
                         <div>
-                            <label htmlFor="email">Email:</label>
-                            <input id="email"
-                            onChange={(e)=>setEmployee({
-                                ...employee,
-                                email: e.target.value
-                            })} 
+                          <label htmlFor="email">Email:</label>
+                          <input id="email"
+                            onChange={(e) => setEmployee({
+                              ...employee,
+                              email: e.target.value
+                            })}
                             value={employee.email}
-                            className='form-control' 
-                            type='email' 
-                            
-                            />
+                            className='form-control'
+                            type='email'
+
+                          />
                         </div>
                         <div>
-                            <label htmlFor="employment">Employment Type:</label>
-                                <select id="employment" 
-                                onChange={(e) => setEmployee({
-                                    ...employee,
-                                    employment: e.target.value
-                                })}
-                                value={employee.employment}
-                                className="form-select" 
-                                aria-label="Employment Type"
-                                required>
-                                    <option value="" disabled>Select employment type</option>
-                                    <option value="full-time">Full-time</option>
-                                    <option value="part-time">Part-time</option>
-                                    <option value="temporary">Temporary</option>
-                                </select>
-                            </div>
+                          <label htmlFor="employment">Employment Type:</label>
+                          <select id="employment"
+                            onChange={(e) => setEmployee({
+                              ...employee,
+                              employment: e.target.value
+                            })}
+                            value={employee.employment}
+                            className="form-select"
+                            aria-label="Employment Type"
+                            required>
+                            <option value="" disabled>Select employment type</option>
+                            <option value="full-time">Full-time</option>
+                            <option value="part-time">Part-time</option>
+                            <option value="temporary">Temporary</option>
+                          </select>
+                        </div>
                         <div>
-                        <label htmlFor="department">Department:</label>
-                        <input id="department" 
-                        onChange={(e)=>setEmployee({
-                            ...employee,
-                            department: e.target.value
-                        })} 
-                        value={employee.department}
-                        className='form-control' 
-                        type='text' 
-                        
-                        />
+                          <label htmlFor="department">Department:</label>
+                          <input id="department"
+                            onChange={(e) => setEmployee({
+                              ...employee,
+                              department: e.target.value
+                            })}
+                            value={employee.department}
+                            className='form-control'
+                            type='text'
+
+                          />
                         </div>
                       </div>
                     </div>
@@ -151,13 +154,13 @@ const handleAddEmployee = () => {
         </MDBContainer>
       </div>
 
-    
-    
 
-      </section>
-        
-      
-    );
+
+
+    </section>
+
+
+  );
 }
 
 export default AddEmployee;

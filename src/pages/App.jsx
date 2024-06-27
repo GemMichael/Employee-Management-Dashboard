@@ -6,6 +6,8 @@ import EmployeeCard from './EmployeeCard';
 import AddEmployee from './AddEmployee';
 import EditEmployee from './EditEmployee';
 import { EmployeeProvider } from './EmployeeContext';
+import Login from './auth/Login';
+import Register from './auth/Register';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.js';
 
@@ -22,6 +24,8 @@ function App(){
             <Route path='EmployeeCard' element={<EmployeeCard />}/>
             <Route path='AddEmployee' element={<AddEmployee />}/>
             <Route path='EditEmployee' element={<EditEmployee />}/>
+            <Route path='login' element={<Login />}/>
+            <Route path='register' element={<Register />}/>
             </Route>
         </Routes>
         </EmployeeProvider>
